@@ -1,4 +1,3 @@
-console.log("Hello World!");
 window.customElements.define('my-app', class extends HTMLElement {
 
 	constructor() {
