@@ -1,4 +1,5 @@
-import { ShadowElement, wcDefine } from './core/wcshadow';
+import { ShadowElement, wcDefine } from '@app/core/wcshadow';
+import '@app/modules/color-wave';
 
 wcDefine('my-app', class extends ShadowElement {
 
@@ -7,12 +8,10 @@ wcDefine('my-app', class extends ShadowElement {
 		this.render()
 	}
 
+
 	async render() {
 		this.shadow.innerHTML = "<div>Loading</div>"
 
-		const response = await fetch('/templates/myhtml.html')
-		const template = await response.text();
-
-		this.shadow.innerHTML = template;
+		this.shadow.innerHTML = await this.getTemplate('/templates/myhtml.html')
 	}
 });

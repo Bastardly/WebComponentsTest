@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "My project",
   "type": "module",
+  "source": "src/index.html",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

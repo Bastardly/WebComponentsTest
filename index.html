@@ -5,8 +5,31 @@
         <title>Webpack App</title>
     </head>
     <body>
-        <h1>Hello world!</h1>
-        <my-app></my-app>
+        <style>
+            * {
+                z-index: 1;
+            }
+            .stack {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+                background: transparent;
+			}
+            .container {
+                overflow-y: auto;
+            }
+
+            color-wave {
+                z-index: 0;
+            }
+        </style>
+        <div class="container stack">
+            <h1>Hello world!</h1>
+            <my-app></my-app>
+        </div>
+            <color-wave class="stack"></color-wave>
         <script type="module" src="/src/main.ts"></script>
     </body>    
 </html>

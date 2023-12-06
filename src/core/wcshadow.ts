@@ -22,6 +22,11 @@ export class ShadowElement extends HTMLElement {
 	shadowSelector<T extends HTMLElement>(query: string) {
 		return this.shadow.querySelector(query) as T;
 	}
+
+	async getTemplate(src: string) {
+		const response = await fetch('/templates/myhtml.html')
+		return response.text();
+	}
 }
 
 export function wcDefine(
