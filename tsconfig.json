@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+	  "paths": {
+		"@app/*": ["./src/*"]
+	  },
+	  "lib": ["dom", "ES2021"],
+	  "target": "es6",
+	  "noEmit": true,
+	  "noImplicitAny": true,
+	  "typeRoots": [
+		"./node_modules/@types",
+		"./typings/"
+	],
+	},
+		"exclude": [
+		"./node_modules/*",
+		"./.parcel-cache/*",
+		"./dist/*",
+	]
+  }
