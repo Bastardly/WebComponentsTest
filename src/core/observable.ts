@@ -54,13 +54,10 @@ class Observable<T> {
 
 	// Denne broadcaster updates til alle observers(subscribers).
 	broadcastUpdate(selectors?: (keyof T)[]) {
-
-
-
 		if (!selectors?.length) {
 			this.updateObservers()
 		} else {
-			selectors.forEach(this.updateObservers)
+			selectors.forEach((selector) => this.updateObservers(selector))
 		}
 
 		this.oldState = this.state;
