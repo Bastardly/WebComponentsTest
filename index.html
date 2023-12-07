@@ -25,7 +25,15 @@
             color-wave {
                 z-index: 0;
             }
+            test-layer {
+                position: fixed;
+				bottom: 0;
+				right: 0;
+                background: transparent;
+                z-index: 2;                
+            }
         </style>
+            <test-layer></test-layer>
         <div class="container stack">
             <h1>Hello world!</h1>
             <my-app></my-app>

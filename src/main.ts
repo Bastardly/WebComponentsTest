@@ -2,6 +2,7 @@ import { store } from "@app/core/store";
 import { ShadowElement, wcDefine } from '@app/core/wcshadow';
 import '@app/modules/blue-text';
 import '@app/modules/color-wave';
+import '@app/modules/test-layer';
 import { simpleTestService } from './services/simple-test.service';
 
 // ShadowElement is an extended HTMLElement which uses shadowDom and was a few methods like shadowSelector and getTemplate
