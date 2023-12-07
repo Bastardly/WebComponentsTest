@@ -26,5 +26,4 @@ export function runUnitTests() {
 			errorMsg: "This should not have failed"
 		})
 	}
-
 }

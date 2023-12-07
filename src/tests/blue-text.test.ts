@@ -25,7 +25,4 @@ export function runBlueTextTest() {
 			errorMsg: "Expected shadowRoot's mode to be open"
 		})
 	}
-
-
-
 }

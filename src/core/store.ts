@@ -15,7 +15,6 @@ const initialState: IState = {
 	testErrors: [],
 }
 
-
 export class StoreObservable extends Observable<IState> {
 	constructor() {
 		super();
