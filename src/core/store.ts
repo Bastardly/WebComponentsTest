@@ -1,8 +1,12 @@
 import { IObserver, Observable } from '@app/core/observable';
 
-export interface IState {}
+export interface IState {
+	loadStatus: 'Not initialized' | 'Not loaded' | 'Loaded';
+}
 
-const initialState: IState = {}
+const initialState: IState = {
+	loadStatus: 'Not initialized'
+}
 
 
 export class StoreObservable extends Observable<IState> {
