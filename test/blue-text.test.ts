@@ -1,4 +1,5 @@
-import { testService } from "@app/services/test.service";
+import "@app/modules/blue-text";
+import { testService } from "@test/_test.service";
 
 /*
  There are some limitations to this. In order to test the contents of the shadowDom (unless it is written in the constructor)
@@ -14,6 +15,7 @@ export function runBlueTextTest() {
 	// We let this error fail on purpose to show it works
 	if (true) {
 		testService.addErrorMsg({
+			id: '1',
 			filePath,
 			errorMsg: 'This error is intended - And'
 		})
@@ -21,6 +23,7 @@ export function runBlueTextTest() {
 
 	if (blueText.shadowRoot.mode !== 'open') {
 		testService.addErrorMsg({
+			id: '2',
 			filePath,
 			errorMsg: "Expected shadowRoot's mode to be open"
 		})

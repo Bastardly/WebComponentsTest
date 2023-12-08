@@ -1,7 +1,4 @@
-import { store } from "@app/core/store";
 import { ShadowElement, wcDefine } from "@app/core/wcshadow";
-import { runBlueTextTest } from "@app/tests/blue-text.test";
-import { runUnitTests } from "@app/tests/unit.test";
 
 wcDefine('test-layer', class extends ShadowElement {
 	numberOfErrors = 0;
@@ -10,52 +7,49 @@ wcDefine('test-layer', class extends ShadowElement {
 		super();
 		this.render();
 
+		addEventListener("storage", (event: StorageEvent) => {
+			if (event.key === 'tests' && event.newValue !== event.oldValue) {
+				const parsed = JSON.parse(event.newValue);
+				this.numberOfErrors = Object.keys(parsed).length;
 
-		this.storeObserver = store.subscribe((newState) => {
-			this.numberOfErrors = newState.testErrors.length;
-			console.error(newState.testErrors)
-			this.render();
-		}, 'testErrors')
+				if (this.numberOfErrors > 0) {
+					console.error(parsed)
+					this.updateLink();
+				}
+			}
+		});
 
-		this.runTests();
 	}
 
-	runTests() {
-		runBlueTextTest();
-		runUnitTests();
-	}
-
-	handleClick() {
-		alert('Her kunne vi åbne en dialog, med pænere oversigt over errors og evt. passed tests')
+	updateLink() {
+		const link = this.shadowSelector<HTMLLinkElement>('a');
+		link.innerText = `Errors: ${this.numberOfErrors} - Check console`;
 	}
 
 	render() {
-		if (!this.numberOfErrors) {
-			this.shadow.innerHTML = "";
-
-			return;
-		}
-
 		this.shadow.innerHTML = /*html*/`
 		<style>
-			button {
+			a {
+				text-decoration: none;
 				padding: 6px 8px;
 				background: red;
 				color: white;
 				font-weight: bold;
 				border: 1px solid darkred;
 			}
+			
+			iframe {
+				height: 1px;
+				width: 1px;
+				opacity: 0;
+				z-index: 0;
+			}
 		</style>
-		<button title="Check console">Errors: ${this.numberOfErrors} - Check console</button>
+		<a href="/testpage" title="Check console"></a>
+		<iframe src="/testpage" />
 		`
+		this.updateLink();
 
-		const btn = this.shadowSelector<HTMLButtonElement>('button');
-		btn.onclick = () => this.handleClick();
 
-	}
-
-	disconnectedCallback() {
-		// If our component is removed from the dom tree, we unsubscribe the observer.
-		this.storeObserver.unsubscribe(this.storeObserver);
 	}
 })

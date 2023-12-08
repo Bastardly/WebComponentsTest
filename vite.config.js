@@ -6,7 +6,15 @@ export default defineConfig({
 	publicDir: 'public',
 	resolve: {
 		alias: {
-			'@app/': `${path.resolve(__dirname, 'src')}/`
+			'@app/': `${path.resolve(__dirname, 'src')}/`,
+			'@test/': `${path.resolve(__dirname, 'test')}/`
 		}
-	}
+	},
+	build: {
+		rollupOptions: {
+			input: {
+				testpage: path.resolve(__dirname, 'testpage.html'),
+			},
+		},
+	},
 })
