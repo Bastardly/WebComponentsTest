@@ -8,7 +8,6 @@ wcDefine('test-layer', class extends ShadowElement {
 		this.render();
 
 		addEventListener("storage", (event: StorageEvent) => {
-			console.log('we got an update!')
 			if (event.key === 'tests' && event.newValue !== event.oldValue) {
 				const parsed = JSON.parse(event.newValue);
 				this.numberOfErrors = Object.keys(parsed).length;

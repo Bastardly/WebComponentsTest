@@ -18,6 +18,6 @@ export const simpleTestService = register(class {
 			...this.storeObservable.state,
 			loadStatus
 			// We pass 'loadStatus' as a selector, so that our subscribers can listen specifically for that.
-		}, 'testErrors')
+		}, 'testValues')
 	}
 })

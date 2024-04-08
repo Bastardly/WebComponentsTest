@@ -13,7 +13,6 @@ wcDefine('my-app', class extends ShadowElement {
 		// Here we subscribe to store changes. Then we can compare the changes we want, and fully control how we update our component
 		this.storeObserver = store.subscribe((newState, oldState) => {
 			if (newState['loadStatus'] !== oldState?.['loadStatus']) {
-				console.log(newState.loadStatus)
 
 				// If condition is met, we add an update to our dom.
 				if (newState.loadStatus === 'Loaded') {
