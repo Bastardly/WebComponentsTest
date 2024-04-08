@@ -24,7 +24,13 @@ wcDefine('test-layer', class extends ShadowElement {
 
 	updateLink() {
 		const link = this.shadowSelector<HTMLLinkElement>('a');
-		link.innerText = `Errors: ${this.numberOfErrors} - Check console`;
+		link.innerText = `Errors: ${this.numberOfErrors}`;
+
+		if(!this.numberOfErrors) {
+			link.classList.add('supergreen')
+		} else {
+			link.classList.remove('supergreen')
+		}
 	}
 
 	render() {
@@ -37,6 +43,10 @@ wcDefine('test-layer', class extends ShadowElement {
 				color: white;
 				font-weight: bold;
 				border: 1px solid darkred;
+			}
+
+			.supergreen {
+				background: limegreen;
 			}
 			
 			iframe {

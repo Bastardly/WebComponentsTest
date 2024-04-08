@@ -40,11 +40,6 @@ export function runBlueTextTest(createContainer: () => IContainer) {
 		})
 	}
 
-	window.requestAnimationFrame(() => {
-		console.dir(blueText)
-
-	})
-
 	if (innerParagraph?.innerHTML !== "<slot></slfot>") {
 		testService.addErrorMsg({
 			filePath,

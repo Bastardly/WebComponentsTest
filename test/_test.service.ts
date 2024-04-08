@@ -28,6 +28,7 @@ class TestService  {
 		})
 		this.writeToLocalStorage();
 	}
+
 }
 
 export const testService = new TestService();
