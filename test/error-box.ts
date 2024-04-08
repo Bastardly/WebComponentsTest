@@ -17,11 +17,11 @@ wcDefine('error-box', class extends ShadowElement {
         `
         store.subscribe((state) => {
             this.shadow.innerHTML = defaultHTML;
-            Object.values(state.testErrors).forEach((err) => {
+            Object.values(state.testValues).forEach((err) => {
                 const div = document.createElement('div');
                 div.innerText = JSON.stringify(err);
                 this.shadow.appendChild(div)
             })
-        }, 'testErrors')
+        }, 'testValues')
     }
 })

@@ -12,18 +12,17 @@ function isEqual(value: number) {
 export function runUnitTests() {
 	const filePath = '@app/somewhere/somefile.ts';
 
-	if (isEqual(2)) {
-		testService.addErrorMsg({
+		testService.test({
+			result: isEqual(2),
+			expected: true,
 			filePath,
 			errorMsg: "isEqual should return equal values as true"
 		})
-	}
 
-	if (!isEqual(1)) {
-		testService.addErrorMsg({
+		testService.test({
+			result: isEqual(1),
+			expected: false,
 			filePath,
 			errorMsg: "isEqual should return inequal values as false"
 		})
-	}
-
 }

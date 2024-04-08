@@ -1,6 +1,6 @@
-export interface IError {
+export interface ITestValues {
 	filePath: string;
 	errorMsg: string;
-	expected?: unknown;
-	got?: unknown;
+	expected: unknown;
+	result: unknown;
 }

@@ -1,32 +1,38 @@
 import { store } from "@app/core/store";
-import { IError } from "@app/core/types";
-
+import { ITestValues } from "@app/core/types";
 
 class TestService  {
-	writeToLocalStorage() {
-		window.localStorage.setItem('tests', JSON.stringify(store.state.testErrors));
+	#writeToLocalStorage() {
+		window.localStorage.setItem('tests', JSON.stringify(store.state.testValues));
 	}
 
-	addErrorMsg(testError: IError) {
-		const id = testError.filePath + self.crypto.randomUUID();
+	#addErrorMsg(testError: ITestValues) {
+		const id = testError.filePath + testError.errorMsg
 		store.setState({
 			...store.state,
-			testErrors: {
-				...store.state.testErrors,
+			testValues: {
+				...store.state.testValues,
 				[id]: testError
 			}
 		})
 
-		this.writeToLocalStorage();
-
+		this.#writeToLocalStorage();
 	}
 
 	clearErrors() {
 		store.setState({
 			...store.state,
-			testErrors: {}
+			testValues: {}
 		})
-		this.writeToLocalStorage();
+		this.#writeToLocalStorage();
+		window.location.reload();
+	}
+
+	test(testValues: ITestValues) {
+		if (testValues.expected !== testValues.result) {
+			console.log(testValues.expected, testValues.result)
+			this.#addErrorMsg(testValues)
+		}
 	}
 
 }

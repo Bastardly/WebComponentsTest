@@ -1,14 +1,14 @@
 import { IObserver, Observable } from '@app/core/observable';
-import { IError } from './types';
+import { ITestValues } from './types';
 
 export interface IState {
 	loadStatus: 'Not initialized' | 'Not loaded' | 'Loaded';
-	testErrors: Record<string, IError>
+	testValues: Record<string, ITestValues>
 }
 
 const initialState: IState = {
 	loadStatus: 'Not initialized',
-	testErrors: {},
+	testValues: {},
 }
 
 export class StoreObservable extends Observable<IState> {
