@@ -1,5 +1,8 @@
 import { StoreObserver } from "@app/core/store";
 
+/**
+ * ShadowElement extends HTMLElement and attaches shadowRoot and applies a couple of utility methods.
+ */
 export class ShadowElement extends HTMLElement {
 	shadow: ShadowRoot;
 	storeObserver: StoreObserver;
@@ -30,11 +33,16 @@ export class ShadowElement extends HTMLElement {
 	 * @returns {string} html as string
 	 */
 	async getTemplate(src: string) {
-		const response = await fetch('/templates/myhtml.html')
+		const response = await fetch(src)
 		return response.text();
 	}
 }
 
+
+/**
+ * wcDefine helps defining custom components:
+ * wcDefine('custom-name', class extends ShadowElement { ... })
+ */
 export function wcDefine(
 	name: string,
 	webcomponentClass: CustomElementConstructor

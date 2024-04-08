@@ -18,7 +18,7 @@ class Observable<T> {
 
 	/**
 	 * 
-	 * @param passedSelectors UpdateMethod is only run if selector is presemt, or an empty array is passed.
+	 * @param passedSelectors UpdateMethod is only run if selector is present, or an empty array is passed.
 	 * @param updateMethod  Method that is used to update the component. (newState, oldState, selector) => use states and selector to control updates
 	 * @returns 
 	 */
@@ -52,7 +52,7 @@ class Observable<T> {
 		});
 	}
 
-	// Denne broadcaster updates til alle observers(subscribers).
+	// This broadcasts to all observers(subscribers).
 	broadcastUpdate(selectors?: (keyof T)[]) {
 		if (!selectors?.length) {
 			this.updateObservers()
