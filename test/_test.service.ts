@@ -30,7 +30,6 @@ class TestService  {
 
 	test(testValues: ITestValues) {
 		if (testValues.expected !== testValues.result) {
-			console.log(testValues.expected, testValues.result)
 			this.#addErrorMsg(testValues)
 		}
 	}
