@@ -9,6 +9,8 @@ export function runBlueTextTest(createContainer: () => IContainer) {
 	container.appendChild(blueText)
 	const innerParagraph = blueText.shadowRoot.querySelector('p');
 
+	const styles = window.getComputedStyle(innerParagraph);
+	
 		testService.test({
 			result: blueText.innerText,
 			expected: '',
@@ -22,6 +24,14 @@ export function runBlueTextTest(createContainer: () => IContainer) {
 			filePath,
 			errorMsg: "blueText should have a shadowDOM"
 		})	
+
+		testService.test({
+			result: styles.color,
+			expected: 'rgb(0, 0, 255)',
+			filePath,
+			errorMsg: "blueText should have styleTag with correct styling"
+		})
+
 
 		testService.test({
 			result: blueText.shadowRoot.styleSheets[0].cssRules[0].cssText,
