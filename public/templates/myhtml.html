@@ -1,27 +1,19 @@
 <style>
     .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
         padding: 8px;
-        border: 1px solid orange;
-        border-radius: 8px;
         max-width: fit-content;
-        background: peachpuff;
-    }
-    h2 {
-        color: orangered;
-    }
-    p {
-        color: green;
     }
 </style>
 
 <div class="container">
-    <h2>This is a web component</h2>
+    <h1>This the main page</h1>
     <p>With some content from a HTML template file...</p>
     <blue-text>This is a custom component!</blue-text>
-    <figure>
-    <ifmg src="images/image.png" alt="Metaphoric depiction of frontend developer pain" />
-    <figcaption>Metaphoric depiction of frontend developer pain</figcaption>
-</figure>
 </div>
     
 <script>

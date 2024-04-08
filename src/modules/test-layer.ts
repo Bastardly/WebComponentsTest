@@ -8,6 +8,7 @@ wcDefine('test-layer', class extends ShadowElement {
 		this.render();
 
 		addEventListener("storage", (event: StorageEvent) => {
+			console.log('we got an update!')
 			if (event.key === 'tests' && event.newValue !== event.oldValue) {
 				const parsed = JSON.parse(event.newValue);
 				this.numberOfErrors = Object.keys(parsed).length;
@@ -45,11 +46,10 @@ wcDefine('test-layer', class extends ShadowElement {
 				z-index: 0;
 			}
 		</style>
-		<a href="/testpage" title="Check console"></a>
+		<a href="/testpage" target="_blank" rel="noreferrer" title="Check console"></a>
 		<iframe src="/testpage" />
 		`
 		this.updateLink();
-
 
 	}
 })

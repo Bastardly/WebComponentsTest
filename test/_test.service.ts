@@ -1,29 +1,31 @@
+import { store } from "@app/core/store";
+import { IError } from "@app/core/types";
 
-interface IError {
-	id: string;
-	filePath: string;
-	errorMsg: string;
-	expected?: unknown;
-	got?: unknown;
-}
 
-class TestService {
-	errors: Record<string, IError> = {}
-
+class TestService  {
 	writeToLocalStorage() {
-		window.localStorage.setItem('tests', JSON.stringify(this.errors));
+		window.localStorage.setItem('tests', JSON.stringify(store.state.testErrors));
 	}
 
 	addErrorMsg(testError: IError) {
-		const id = testError.filePath + testError.id;
-		this.errors[id] = testError;
+		const id = testError.filePath + self.crypto.randomUUID();
+		store.setState({
+			...store.state,
+			testErrors: {
+				...store.state.testErrors,
+				[id]: testError
+			}
+		})
 
 		this.writeToLocalStorage();
 
 	}
 
 	clearErrors() {
-		this.errors = {};
+		store.setState({
+			...store.state,
+			testErrors: {}
+		})
 		this.writeToLocalStorage();
 	}
 }
