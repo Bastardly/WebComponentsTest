@@ -1,4 +1,5 @@
 import { ShadowElement, wcDefine } from "@app/core/wcshadow";
+import { logService } from "@app/services/log.service";
 
 /**
  * This is a very simple component made for testing purposes that should be easy to understand.

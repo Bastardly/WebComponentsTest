@@ -4,17 +4,22 @@ import '@app/modules/blue-text';
 import '@app/modules/color-wave';
 import '@app/modules/test-layer';
 import { simpleTestService } from './services/simple-test.service';
+import { logService } from "./services/log.service";
+
+logService.log(`main.ts loaded`)
 
 // ShadowElement is an extended HTMLElement which uses shadowDom and was a few methods like shadowSelector and getTemplate
 wcDefine('my-app', class extends ShadowElement {
 	constructor() {
 		super();
+		logService.log(`main.ts my-app initial loadStatus is: ${store.state.loadStatus}`)
 
 		// Here we subscribe to store changes. Then we can compare the changes we want, and fully control how we update our component
 		this.storeObserver = store.subscribe((newState, oldState) => {
 			if (newState['loadStatus'] !== oldState?.['loadStatus']) {
 
 				// If condition is met, we add an update to our dom.
+				logService.log(`main.ts loadstatus, ${newState.loadStatus}`)
 				if (newState.loadStatus === 'Loaded') {
 					const p = document.createElement('p');
 					p.innerText = 'Our page is fully loaded'

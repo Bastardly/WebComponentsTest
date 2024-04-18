@@ -1,4 +1,5 @@
 import { StoreObserver } from "@app/core/store";
+import { logService } from "@app/services/log.service";
 
 /**
  * ShadowElement extends HTMLElement and attaches shadowRoot and applies a couple of utility methods.
@@ -33,6 +34,8 @@ export class ShadowElement extends HTMLElement {
 	 * @returns {string} html as string
 	 */
 	async getTemplate(src: string) {
+		logService.log(`wcshadow.ts fetching template src: ${src}`)
+
 		const response = await fetch(src)
 		return response.text();
 	}
