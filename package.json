@@ -4,10 +4,7 @@
   "description": "HTML templates test App",
   "type": "module",
   "source": "src/index.html",
-  "workspaces": [
-    "packages\\core",
-    "packages\\store"
-],
+  "workspaces": ["packages/*"],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
