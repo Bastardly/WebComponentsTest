@@ -1,0 +1,10 @@
+{
+    "name": "@app/core",
+    "version": "1.0.0",
+    "description": "Core elements to hotstuff test project",
+    "type": "module",
+    "main": "src/index.mjs",
+    "scripts": { },
+    "devDependencies": {    }
+  }
+  

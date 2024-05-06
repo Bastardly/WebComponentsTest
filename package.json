@@ -1,16 +1,19 @@
 {
-  "name": "my-project",
+  "name": "@app",
   "version": "1.0.0",
   "description": "HTML templates test App",
   "type": "module",
   "source": "src/index.html",
+  "workspaces": [
+    "packages\\core",
+    "packages\\store"
+],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
     "vite": "^5.0.4"
   }
 }

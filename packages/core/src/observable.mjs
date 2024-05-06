@@ -1,35 +1,19 @@
-export type IUpdateMethod<T> = (
-	newValues: T,
-	oldState: T,
-	selector: keyof T,
-) => void | Promise<void>;
-
-export interface IObserver<T> {
-	overRideSelectors: boolean;
-	selectors: (keyof T)[];
-	updateMethod: IUpdateMethod<T>;
-	unsubscribe: (value: IObserver<T>) => boolean;
-}
-
-class Observable<T> {
-	observers: Set<IObserver<T>> = new Set();
-	state!: T;
-	oldState!: T;
+class Observable {
+	observers = new Set();
 
 	/**
-	 * 
 	 * @param passedSelectors UpdateMethod is only run if selector is present, or an empty array is passed.
 	 * @param updateMethod  Method that is used to update the component. (newState, oldState, selector) => use states and selector to control updates
 	 * @returns 
 	 */
-	subscribe(updateMethod: IUpdateMethod<T>, ...args: (keyof T)[]) {
+	subscribe(updateMethod, ...args) {
 		const selectors = [...args];
 
-		const observer: IObserver<T> = {
+		const observer = {
 			overRideSelectors: !selectors.length,
 			selectors,
 			updateMethod,
-			unsubscribe: (createdObserver: IObserver<T>) =>
+			unsubscribe: (createdObserver) =>
 				this.observers.delete(createdObserver),
 		};
 
@@ -38,13 +22,13 @@ class Observable<T> {
 		return observer;
 	}
 
-	setState(newState: T, ...args: (keyof T)[]) {
+	setState(newState, ...args) {
 		const selectors = [...args]
 		this.state = newState;
 		this.broadcastUpdate(selectors);
 	}
 
-	updateObservers(selector?: keyof T) {
+	updateObservers(selector) {
 		this.observers.forEach((observer) => {
 			if (observer.overRideSelectors || !selector || observer.selectors.includes(selector)) {
 				observer.updateMethod(this.state, this.oldState, selector);
@@ -53,7 +37,7 @@ class Observable<T> {
 	}
 
 	// This broadcasts to all observers(subscribers).
-	broadcastUpdate(selectors?: (keyof T)[]) {
+	broadcastUpdate(selectors) {
 		if (!selectors?.length) {
 			this.updateObservers()
 		} else {

@@ -17,11 +17,11 @@ class LogService {
         return LogService.ignoredRoutes.includes(path);
     }
 
-    #createMsg(msg: string) {
+    #createMsg(msg) {
         return `${new Date().toLocaleTimeString()} - ${msg}`
     };
 
-    log(msg: string) {
+    log(msg) {
         if (this.#getIsNonLogableRoute()) return;
 
         try {
@@ -34,8 +34,7 @@ class LogService {
         } catch {
             sessionStorage.setItem('log', JSON.stringify([this.#createMsg(msg)]))
         }
-    }
-    
+    }   
     
 
 }

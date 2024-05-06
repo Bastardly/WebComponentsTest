@@ -1,0 +1,12 @@
+{
+    "name": "@app/store",
+    "version": "1.0.0",
+    "description": "Core elements to hotstuff test project",
+    "type": "module",
+    "main": "./src/store.mjs",
+    "scripts": { },
+    "dependencies": {
+      "@app/core": "1.0.0"
+    }
+  }
+  
