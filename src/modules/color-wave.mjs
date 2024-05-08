@@ -123,7 +123,7 @@ wcDefine(
 
     initialized = false;
 
-    initialize() {
+    #initialize() {
       if (this.initialized) return;
 
       this.innerHTML = "<canvas></canvas>";
@@ -145,23 +145,23 @@ wcDefine(
       this.initialized = true;
     }
 
-    createRipple(x, y) {
+    #createRipple(x, y) {
       this.startingHue -= 1;
-      const ripple = this.getUnusedRipple();
+      const ripple = this.#getUnusedRipple();
       ripple.initialize(x, y, this.startingHue);
       this.activeRipples.push(ripple);
     }
 
-    throttleCreateRipple = (x, y, throttleDelay) => {
+    #throttleCreateRipple = (x, y, throttleDelay) => {
       const currentTime = new Date().getTime();
       if (currentTime - this.lastRippleTime >= throttleDelay) {
-        this.createRipple(x, y);
+        this.#createRipple(x, y);
         this.lastRippleTime = currentTime;
       }
     };
 
-    updateCanvas() {
-      requestAnimationFrame(() => this.updateCanvas());
+    #updateCanvas() {
+      requestAnimationFrame(() => this.#updateCanvas());
 
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -179,15 +179,14 @@ wcDefine(
     }
 
     /**
-     * @public
      * @returns {Ripple}
      */
-    getUnusedRipple() {
+    #getUnusedRipple() {
       return this.unusedRipples.pop() || new Ripple(this.context);
     }
 
     connectedCallback() {
-      this.initialize();
+      this.#initialize();
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
       this.canvas.style.background = "white";
@@ -198,7 +197,7 @@ wcDefine(
         const delayMultiplier =
           this.activeRipples.length / settings.initialRipplePool;
 
-        return this.throttleCreateRipple(
+        return this.#throttleCreateRipple(
           x,
           y,
           settings.throttleDelay * delayMultiplier
@@ -209,7 +208,7 @@ wcDefine(
         this.unusedRipples.push(new Ripple(this.context));
       }
 
-      this.updateCanvas();
+      this.#updateCanvas();
     }
   }
 );
