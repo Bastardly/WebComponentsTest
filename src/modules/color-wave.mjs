@@ -123,7 +123,7 @@ wcDefine(
 
     initialized = false;
 
-    init() {
+    initialize() {
       if (this.initialized) return;
 
       this.innerHTML = "<canvas></canvas>";
@@ -187,7 +187,7 @@ wcDefine(
     }
 
     connectedCallback() {
-      this.init();
+      this.initialize();
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
       this.canvas.style.background = "white";
