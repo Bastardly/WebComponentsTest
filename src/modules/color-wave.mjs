@@ -6,6 +6,7 @@ const settings = {
   hue: 255,
   hueDropoff: 5,
   baseOpacity: 1,
+  saturation: 100,
   rings: 1,
   waveSize: 8,
   speed: 3,
@@ -78,7 +79,7 @@ class Ripple {
   }
 
   #drawRing({ radius, opacity }) {
-    const style = `hsla(${this.hue}deg, 100%, 95%, ${opacity})`;
+    const style = `hsla(${this.hue}deg, ${settings.saturation}%, 95%, ${opacity})`;
 
     this.context.beginPath();
     this.context.arc(this.x, this.y, radius, 0, Math.PI * 2);
