@@ -31,6 +31,11 @@ class Ripple {
     this.context = context;
   }
 
+  /**
+   * @public
+   * @memberof Ripple
+   * @description Starts the ripple animation.
+   */
   initialize(x, y, startingHue) {
     // Reset base settings
     this.baseOpacity = settings.baseOpacity;
@@ -43,6 +48,11 @@ class Ripple {
     this.hue = startingHue;
   }
 
+  /**
+   * @public
+   * @memberof Ripple
+   * @description Creates rings
+   */
   createRings() {
     this.rings += this.speed;
     const ringOpacities = [];
@@ -82,9 +92,58 @@ wcDefine(
   "color-wave",
   class extends HTMLElement {
     startingHue = 255;
+
+    /**
+     * canvas is a HTMLCanvasElement
+     * @type {Ripple[]}
+     * @public
+     */
     activeRipples = [];
+
+    /**
+     * canvas is a HTMLCanvasElement
+     * @type {Ripple[]}
+     * @public
+     */
     unusedRipples = [];
+
     lastRippleTime = 0;
+
+    /**
+     * @type {HTMLCanvasElement}
+     * @public
+     */
+    canvas;
+
+    /**
+     * @type {CanvasRenderingContext2D}
+     * @public
+     */
+    context;
+
+    initialized = false;
+
+    init() {
+      if (this.initialized) return;
+
+      this.innerHTML = "<canvas></canvas>";
+
+      const canvas = this.querySelector("canvas");
+
+      if (canvas) {
+        this.canvas = canvas;
+      }
+
+      this.appendChild(this.canvas);
+
+      const ctx = this.canvas.getContext("2d");
+
+      if (ctx) {
+        this.context = ctx;
+      }
+
+      this.initialized = true;
+    }
 
     createRipple(x, y) {
       this.startingHue -= 1;
@@ -119,21 +178,19 @@ wcDefine(
       this.activeRipples = newRipples;
     }
 
+    /**
+     * @public
+     * @returns {Ripple}
+     */
     getUnusedRipple() {
-      if (this.unusedRipples.length > 0) {
-        return this.unusedRipples.pop();
-      }
-      return new Ripple(this.context);
+      return this.unusedRipples.pop() || new Ripple(this.context);
     }
 
     connectedCallback() {
-      this.innerHTML = '<canvas id="waveCanvas"></canvas>';
-
-      this.canvas = document.getElementById("waveCanvas");
+      this.init();
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
       this.canvas.style.background = "white";
-      this.context = this.canvas.getContext("2d");
 
       document.onmousemove = (e) => {
         const x = e.clientX;

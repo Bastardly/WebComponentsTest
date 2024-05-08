@@ -25,7 +25,7 @@ export class ShadowElement extends HTMLElement {
    * Fetches a HTML template as a string.
    * NOTE! You cannot use scripts.
    * @param {string} src Source of the html template asset
-   * @returns {string} html as string
+   * @returns {Promise<string>} html as string
    */
   async getTemplate(src) {
     const response = await fetch(src);
