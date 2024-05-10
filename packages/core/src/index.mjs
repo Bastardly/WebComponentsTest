@@ -1,3 +1,3 @@
-export { Observable } from "./observable";
+export { wcDefine, ShadowElement } from "./wcshadow.mjs";
 
-export { wcDefine, ShadowElement } from "./wcshadow";
+export { Store } from "./store.mjs"
