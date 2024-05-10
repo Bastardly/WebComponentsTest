@@ -56,7 +56,7 @@ export class Store {
   }
 
   subscribe(updateMethod) {
-    const unsubscriber = {};
+    const unsubscriber = Symbol();
 
     this.#subscribers.set(unsubscriber, updateMethod);
 
@@ -64,6 +64,10 @@ export class Store {
   }
 
   unsubscribe(unsubscriber) {
+    if (!this.#subscribers.has(unsubscriber)) {
+      throw new Error('Unsubscriber symbol must be the same as when subscribing')
+    }
+
     this.#subscribers.delete(unsubscriber);
   }
 }

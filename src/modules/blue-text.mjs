@@ -11,6 +11,7 @@ wcDefine(
 
     constructor() {
       super();
+
       this.shadow.innerHTML = /*html*/ `
 		<style>
 			p {
